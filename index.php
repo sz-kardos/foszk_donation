@@ -19,7 +19,10 @@
 </head>
 <body>
     <!--Navbar-->
-    <nav class="nav">
+    <?php
+        include("./templates/navbar.tpl.php");
+    ?>
+    <!--<nav class="nav">
         <div class="nav-menu flex-row">
             <div class="logo">
                 <a href="#" class="text-gray">Kutyásodj</a>
@@ -64,7 +67,7 @@
                 <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
-    </nav>
+    </nav>-->
 
     <main>
 
