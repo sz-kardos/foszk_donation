@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <h2>Regisztráció</h2>
-    <form action="#" method="post">
+    <form action="./logicals/signUpAttempt.php" method="post">
       <div class="input-group">
         <label for="username">Felhasználónév</label>
         <input type="text" id="username" name="username" required>
@@ -19,9 +19,20 @@
         <input type="email" id="email" name="email" required>
       </div>
       <div class="input-group">
+        <label for="password">Jelszó</label>
+        <input type="password" id="password" name="password" minlength="8" required>
+      </div>
+      <div class="input-group">
+        <label for="passwordRepeat">Jelszó ismét</label>
+        <input type="password" id="passwordRepeat" name="passwordRepeat" minlength="8" required>
+      </div>
+      <!--
+        <div class="input-group">
         <label for="avatar">Avatar feltöltése</label>
         <input type="file" id="avatar" name="avatar" accept="image/*">
-      </div>
+        </div>
+      Ezt javaslom rakjuk a profil fül alá. Kezdetben pedig profilkép nélkül indul minden fiók.
+      -->
       <button type="submit" class="btn">Regisztráció</button>
     </form>
   </div>
