@@ -17,7 +17,8 @@
             <?php
                 foreach ($ALWAYS as $item) {
                     $text = $item["text"];
-                    echo "<li class='nav-link'><a href='#'>${text}</a></li>";
+                    $link = $item["link"];
+                    echo "<li class='nav-link'><a href=${link}>${text}</a></li>";
                 }
             ?>
             </ul>

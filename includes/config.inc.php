@@ -1,12 +1,15 @@
 <?php
 /* Adatbázis kezeléshez használt hitelesítési és egyéb adatok,
 illetve az egyetlen fennálló kapcsolat biztosításához használt $PDO változó*/
+session_start();
 $PDO = NULL;
 $HOST = 'localhost';
 $DBNAME = 'webprog1';
 $DBUSERNAME = 'root';
 $DBPASSWORD = '';
-
+if (!isset($_SESSION["loggedInAs"])){
+    $_SESSION["loggedInAs"] = NULL;
+}
 // Oldalak, egyesével
 
 $MAIN = array(
@@ -29,8 +32,9 @@ $BLOG = array(
     "text"=>"Blog"
 );
 
-$CONTACT = array(
-    "text"=>"Kapcsolat"
+$CONTACTUS = array(
+    "text"=>"Kapcsolat",
+    "link"=>"/foszk_donation/sendMessage.php"
 );
 
 $LOGIN = array(
@@ -64,7 +68,7 @@ $ALWAYS = array(
     $FINDOWNER,
     $GOODTOKNOW,
     $BLOG,
-    $CONTACT
+    $CONTACTUS
 ); // Azok az oldalak, amik midig elérhetőek a felhasználó kezdeményezésére
 
 $LOGGEDIN = array(
