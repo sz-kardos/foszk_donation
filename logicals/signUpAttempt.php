@@ -9,12 +9,24 @@ $password = $_POST["password"];
 $passwordRepeat = $_POST["passwordRepeat"];
 
 $allSet = isset($username) && isset($email) && isset($password) && isset($passwordRepeat);
+
 //Beadott adatok ellenorzese
 if ($allSet) {
-    $passwordsMatch = matchPasswords($password, $passwordRepeat);
+    $usernameValid = checkUsername($username);
+    $passwordValid = checkPassword($password);
 } else {
     //Hiányos regisztrációs adatok.
     $_SESSION["message"] = "A megadott regisztrációs adatok hiányosak.";
+    header("Location:".$RESULT["link"]);
+    die();
+}
+
+if ($usernameValid && $passwordValid){
+    $passwordsMatch = matchPasswords($password, $passwordRepeat);
+} else {
+    //Felhasználónév, vagy jelszó nem felel meg a követelményeknek.
+    $invalid = $usernameValid ? "jelszó" : "felhasználónév";
+    $_SESSION["message"] = "A megadott ${invalid} nem felel meg a követelményeknek.";
     header("Location:".$RESULT["link"]);
     die();
 }
@@ -28,53 +40,19 @@ if($passwordsMatch){
     header("Location:".$RESULT["link"]);
     die();
 }
-echo $passwordsHash;
-//Connect to db
-try {
-    connectDB($PDO, $HOST, $DBNAME, $DBUSERNAME, $DBPASSWORD);
-} catch (PDOException $e) {
-    //Nem sikerult csatlakozni a dbhez
-    //$message = $e->getMessage();
-    closeDB($PDO);
-    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    die();
-}
 
-//Check if email or username exists
-try {
-    $emailExists = emailExists($PDO, $email);
-    $usernameExists = usernameExists($PDO, $username);
-} catch (PDOException $e) {
-    //Nem sikerult csatlakozni a dbhez
-    //$message = $e->getMessage();
-    closeDB($PDO);
-    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    die();
-}
+$emailExists = $test_pdo->select_query("SELECT username FROM users WHERE username = ?", $username);
+$usernameExists = $test_pdo->select_query("SELECT email FROM users WHERE email = ?", $email);
 
-//Email vagy username foglalt
 if ($emailExists || $usernameExists) {
     $taken = $emailExists ? "az e-mail cím" : "a felhasználónév";
-    closeDB($PDO);
     $_SESSION["message"] = "Ez ${taken} már foglalt.";
     header("Location:".$RESULT["link"]);
     die();
 }
 
-//Add user
-try {
-    addUser($PDO, $username, $email, $passwordHash);
-}  catch (PDOException $e) {
-    //Nem sikerult csatlakozni a dbhez
-    //$message = $e->getMessage();
-    closeDB($PDO);
-    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    die();
-} finally {
-    closeDB($PDO);
-    assert($PDO == NULL);
-    $_SESSION["message"] = "Sikeres regisztráció mint ".$username.", ".$email." címmel.";
-    header("Location:".$RESULT["link"]);
-}
-//Close db
+$test_pdo->insert_query("INSERT INTO users(username, email, password_hash) VALUES(?, ?, ?)", $username, $email, $passwordHash);
+echo "Hello";
+$_SESSION["message"] = "Sikeres regisztráció mint ".$username.", ".$email." címmel.";
+header("Location:".$RESULT["link"]);
 ?>
