@@ -45,10 +45,9 @@ class DataBaseConnection{
     }
 
     public function insert_query($query, ...$params){
-        $is_closed = false;
         try {
             $this->connectdb();
-            $statement = $pdo->prepare($add_user);
+            $statement = $this->pdo->prepare($query);
             $statement->execute($params);
         } catch (PDOException $e) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
