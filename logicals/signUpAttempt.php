@@ -6,14 +6,14 @@ include_once("../includes/funcs.inc.php");
 $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
-$passwordRepeat = $_POST["passwordRepeat"];
+$password_repeat = $_POST["password_repeat"];
 
-$allSet = isset($username) && isset($email) && isset($password) && isset($passwordRepeat);
+$allSet = isset($username) && isset($email) && isset($password) && isset($password_repeat);
 
 //Beadott adatok ellenorzese
 if ($allSet) {
-    $usernameValid = checkUsername($username);
-    $passwordValid = checkPassword($password);
+    $username_valid = checkUsername($username);
+    $password_valid = checkPassword($password);
 } else {
     //Hiányos regisztrációs adatok.
     $_SESSION["message"] = "A megadott regisztrációs adatok hiányosak.";
@@ -21,19 +21,19 @@ if ($allSet) {
     die();
 }
 
-if ($usernameValid && $passwordValid){
-    $passwordsMatch = matchPasswords($password, $passwordRepeat);
+if ($username_valid && $password_valid){
+    $password_match = matchPasswords($password, $password_repeat);
 } else {
     //Felhasználónév, vagy jelszó nem felel meg a követelményeknek.
-    $invalid = $usernameValid ? "jelszó" : "felhasználónév";
+    $invalid = $username_valid ? "jelszó" : "felhasználónév";
     $_SESSION["message"] = "A megadott ${invalid} nem felel meg a követelményeknek.";
     header("Location:".$RESULT["link"]);
     die();
 }
 
 //Jelszoegyezes ellenorzese
-if($passwordsMatch){
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+if($password_match){
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
 } else {
     //Nem egyeznek a jelszavak.
     $_SESSION["message"] = "A megadott jelszavak nem egyeznek.";
@@ -41,8 +41,8 @@ if($passwordsMatch){
     die();
 }
 
-$emailExists = $test_pdo->select_query("SELECT username FROM users WHERE username = ?", $username);
-$usernameExists = $test_pdo->select_query("SELECT email FROM users WHERE email = ?", $email);
+$emailExists = $database_connection->select_query("SELECT username FROM users WHERE username = ?", $username);
+$usernameExists = $database_connection->select_query("SELECT email FROM users WHERE email = ?", $email);
 
 if ($emailExists || $usernameExists) {
     $taken = $emailExists ? "az e-mail cím" : "a felhasználónév";
@@ -51,8 +51,7 @@ if ($emailExists || $usernameExists) {
     die();
 }
 
-$test_pdo->insert_query("INSERT INTO users(username, email, password_hash) VALUES(?, ?, ?)", $username, $email, $passwordHash);
-echo "Hello";
+$database_connection->insert_query("INSERT INTO users(username, email, password_hash) VALUES(?, ?, ?)", $username, $email, $password_hash);
 $_SESSION["message"] = "Sikeres regisztráció mint ".$username.", ".$email." címmel.";
 header("Location:".$RESULT["link"]);
 ?>

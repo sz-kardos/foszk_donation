@@ -2,11 +2,8 @@
 /* Adatbázis kezeléshez használt hitelesítési és egyéb adatok,
 illetve az egyetlen fennálló kapcsolat biztosításához használt $PDO változó*/
 session_start();
-$PDO = NULL;
-$HOST = 'localhost';
-$DBNAME = 'webprog1';
-$DBUSERNAME = 'root';
-$DBPASSWORD = '';
+include_once("/home/tbuser/NJE/webprog_project/foszk_donation/includes/classes.inc.php");
+$database_connection = new DataBaseConnection();
 if (!isset($_SESSION["loggedInAs"])){
     $_SESSION["loggedInAs"] = NULL;
 }
