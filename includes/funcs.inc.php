@@ -27,4 +27,20 @@ function checkUsername($username){
     return (bool)$match;
 }
 
+function checkMessage($message){
+
+    // Lenyírja a szóközöket a bevitt üzenet két végéről, majd ellenőrzi, hogy:
+    // - az így kapott karakterláncban van-e nem szóköz karakter,
+    // - rövidebb-e, mint a megengedett hossz.
+    // Ha igen, akkor igazat ad vissza, egyébként hamisat.
+
+    $message = trim($message);
+    $messagePattern = "/\S+/";
+    $messageLength = strlen($message);
+    $maxLength = 1024;
+    $lsEqMax = $messageLength <= $maxLength;
+    $validMessage = preg_match($messagePattern, $message) && $lsEqMax;
+    return $validMessage;
+}
+
 ?>

@@ -22,11 +22,11 @@ function checkEmail(email){
     return emailPattern.test(email);
 }
 
-function passwordsMatch(password, password_repeat){
+function passwordsMatch(password, passwordRepeat){
 
     // Igazat ad vissza, ha a jelszó pontosan megegyezik a jelszó megerősítésével, egyébként hamisat
 
-    return password === password_repeat;
+    return password === passwordRepeat;
 }
 
 function submitRegistration(form_id, username_id, email_id, password_id, password_repeat_id){
@@ -38,8 +38,37 @@ function submitRegistration(form_id, username_id, email_id, password_id, passwor
     let email = document.getElementById(email_id).value;
     let password = document.getElementById(password_id).value;
     let password_repeat = document.getElementById(password_repeat_id).value;
-    let all_valid = checkUsername(username) && checkEmail(email) && checkPassword(password) && passwordsMatch(password, password_repeat);
-    if (all_valid) {
+    let allValid = checkUsername(username) && checkEmail(email) && checkPassword(password) && passwordsMatch(password, password_repeat);
+    if (allValid) {
+        let form = document.getElementById(form_id);
+        form.submit()
+    }
+    return;
+}
+
+function checkMessage(message){
+
+    // Lenyírja a szóközöket a bevitt üzenet két végéről, majd ellenőrzi, hogy:
+    // - az így kapott karakterláncban van-e nem szóköz karakter,
+    // - rövidebb-e, mint a megengedett hossz.
+    // Ha igen, akkor igazat ad vissza, egyébként hamisat.
+
+    message = message.trim()
+    let messagePattern = new RegExp("\\S+");
+    let messageLength = message.length;
+    let maxLength = 1024;
+    let lsEqMax = messageLength <= maxLength;
+    let validMessage = messagePattern.test(message) && lsEqMax;
+    return validMessage;
+}
+
+function submitMessage(form_id, message_id){
+
+    // Ellenőrzi, hogy a forma üzenet mezője megfelel-e a követelményeknek.
+    // Ha igen, akkor elküldi a formát az adatokkal.
+
+    let message = document.getElementById(message_id).value;
+    if (checkMessage(message)) {
         let form = document.getElementById(form_id);
         form.submit()
     }
