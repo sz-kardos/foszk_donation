@@ -25,7 +25,7 @@
         </div>
         <div class="social login"> 
             <?php
-                if (isset($_SESSION["loggedInAs"])) {
+                if ($_SESSION["loggedInAs"]) {
                     foreach ($LOGGEDIN as $item) {
                         $text = $item["text"] ? $item["text"] : $_SESSION["loggedInAs"];
                         $link = $item["link"];

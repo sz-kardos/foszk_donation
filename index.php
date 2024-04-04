@@ -22,53 +22,7 @@
     <?php
         include("./templates/navbar.tpl.php");
     ?>
-    <!--<nav class="nav">
-        <div class="nav-menu flex-row">
-            <div class="logo">
-                <a href="#" class="text-gray">Kutyásodj</a>
-            </div>
-            <div class="toggle-collapse">
-                <div class="toggle-icons">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-            <div>
-                <ul class="nav-items">
-                    <li class="nav-link">
-                        <a href="#">Rólunk</a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">Gazdikereső</a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">Jótudni</a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">Blog</a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="#">Kapcsolat</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="social login"> 
-            
-                <a href="login.html">login<i class="fa-solid fa-user"></i></a>
-            
-            
-                <a href="signUp.html">Sign Up<i class="fa-solid fa-user"></i></a>
-           
-        </div>
-           
-            <div class="social text-gray">
-                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-    </nav>-->
-
+    
     <main>
 
         <!-- Site Title -->

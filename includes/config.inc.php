@@ -5,7 +5,7 @@ session_start();
 include_once("/home/tbuser/NJE/webprog_project/foszk_donation/includes/classes.inc.php");
 $database_connection = new DataBaseConnection();
 if (!isset($_SESSION["loggedInAs"])){
-    $_SESSION["loggedInAs"] = NULL;
+    $_SESSION["loggedInAs"] = false;
 }
 // Oldalak, egyesével
 
@@ -49,9 +49,9 @@ $LOGOUT = array(
     "link"=>"/foszk_donation/logicals/logout.php"
 );
 
-$PROFILE = array(
-    "text"=>"",
-    "link"=>""
+$GALLERY = array(
+    "text"=>"Galéria",
+    "link"=>"/foszk_donation/uploadImg.php"
 );
 
 $RESULT = array(
@@ -65,12 +65,12 @@ $ALWAYS = array(
     $FINDOWNER,
     $GOODTOKNOW,
     $BLOG,
-    $CONTACTUS
+    $CONTACTUS,
+    $GALLERY
 ); // Azok az oldalak, amik midig elérhetőek a felhasználó kezdeményezésére
 
 $LOGGEDIN = array(
     $LOGOUT,
-    $PROFILE
 ); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha be van jelentkezve
 
 $LOGGEDOUT = array(

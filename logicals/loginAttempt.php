@@ -5,7 +5,7 @@ include_once("../includes/funcs.inc.php");
 
 $username = $_POST["username"];
 $password = $_POST["password"];
-$all_set = isset($username) && isset($password);
+$all_set = isset($username, $password);
 
 if (!($all_set)) {
     $_SESSION["message"] = "A megadott belépési adatok hiányosak.";
