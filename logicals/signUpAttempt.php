@@ -8,10 +8,10 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $password_repeat = $_POST["password_repeat"];
 
-$allSet = isset($username) && isset($email) && isset($password) && isset($password_repeat);
+$all_set = isset($username, $email, $password, $password_repeat);
 
 //Beadott adatok ellenorzese
-if ($allSet) {
+if ($all_set) {
     $username_valid = checkUsername($username);
     $password_valid = checkPassword($password);
 } else {
