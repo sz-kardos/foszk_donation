@@ -31,7 +31,16 @@
             <div class="site-background" data-aos="fade-up" data-aos-delay="100">
                 <h3>Kisállat ügynökség</h3>
                 <h1>Nálunk igazi családtagra találsz</h1>
-                <button class="btn">megnézem</button>
+                <button class="btn" id="openModal">megnézem</button>
+                    <div id="myModal" class="modal">
+                <div class="modal-content">
+                     <span class="close">&times;</span>
+                     <div class="video-container">
+                     <iframe width="560" height="315" src="https://www.youtube.com/embed/fs2TM6VpUt8?si=E2a2ZAeo01rfnaAz&amp;start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                     
+                </div>
+            </div>
             </div>
         </section>
 
@@ -313,11 +322,8 @@
                 </p>
             </div>
             <div class="newsletter" data-aos="fade-right" data-aos-delay="200">
-                <h2>Hírek</h2>
-                <p>Iratkozz fel hírlevelünkre</p>
-                <div class="form-element">
-                    <input type="text" placeholder="E-mail"><span><i class="fas fa-chevron-right"></i></span>
-                </div>
+                <h2>Itt megtalálsz</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d174519.4572470812!2d19.51390587951217!3d46.885674462929444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4743da6108f61c3f%3A0x400c4290c1e1180!2zS2Vjc2tlbcOpdCwgTWFneWFyb3JzesOhZw!5e0!3m2!1shu!2sus!4v1712319348009!5m2!1shu!2sus" width="350" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="instagram" data-aos="fade-left" data-aos-delay="200">
                 <h2>Instagram</h2>

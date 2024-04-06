@@ -46,3 +46,30 @@ $(document).ready(function () {
     AOS.init();
 
 });
+
+// modal click
+let modal = document.getElementById("myModal");
+let btn = document.getElementById("openModal");
+let span = document.getElementsByClassName("close")[0];
+let iframe = document.querySelector('iframe');
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+    stopVideo();
+  }
+  
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      stopVideo();
+    }
+  }
+  
+function stopVideo() {
+    let iframeSrc = iframe.src;
+    iframe.src = iframeSrc;
+  }
