@@ -43,4 +43,30 @@ function checkMessage($message){
     return $validMessage;
 }
 
+function checkFileSize($file){
+    $MAX_SIZE = 300000;
+    $is_valid_size = $file["size"] < $MAX_SIZE;
+    return $is_valid_size;
+}
+
+function checkIfImage($file){
+    $VALID_TYPES = array(IMAGETYPE_GIF=>"imagecreatefromgif",
+                        IMAGETYPE_JPEG=>"imagecreatefromjpeg",
+                        IMAGETYPE_PNG=>"imagecreatefrompng",
+                        IMAGETYPE_BMP=>"imagecreatefrombmp",
+                        IMAGETYPE_WEBP=>"imagecreatefromwebp");
+    $file_type = exif_imagetype($file["tmp_name"]);
+    $is_valid_type = in_array($file_type, array_keys($VALID_TYPES));
+    if($is_valid_type){
+        $is_valid_type = $VALID_TYPES[$file_type]($file["tmp_name"]);
+    }
+    return $is_valid_type;
+}
+
+function isValidSizeImage($file){
+    $is_valid_file = checkFileSize($file);
+    $is_valid_file = $is_valid_file ? checkIfImage($file) : $is_valid_file;
+    return $is_valid_file;
+}
+
 ?>
