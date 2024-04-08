@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once("../includes/config.inc.php");
-include_once("../includes/funcs.inc.php");
+include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
+include_once($INCLUDES_PATH."/funcs.inc.php");
 
 $username = $_POST["username"];
 $email = $_POST["email"];
@@ -17,7 +17,7 @@ if ($all_set) {
 } else {
     //Hiányos regisztrációs adatok.
     $_SESSION["message"] = "A megadott regisztrációs adatok hiányosak.";
-    header("Location:".$RESULT["link"]);
+    header("Location:".$FRONTEND);
     die();
 }
 
@@ -27,7 +27,7 @@ if ($username_valid && $password_valid){
     //Felhasználónév, vagy jelszó nem felel meg a követelményeknek.
     $invalid = $username_valid ? "jelszó" : "felhasználónév";
     $_SESSION["message"] = "A megadott ${invalid} nem felel meg a követelményeknek.";
-    header("Location:".$RESULT["link"]);
+    header("Location:".$FRONTEND);
     die();
 }
 
@@ -37,7 +37,7 @@ if($password_match){
 } else {
     //Nem egyeznek a jelszavak.
     $_SESSION["message"] = "A megadott jelszavak nem egyeznek.";
-    header("Location:".$RESULT["link"]);
+    header("Location:".$FRONTEND);
     die();
 }
 
@@ -47,11 +47,11 @@ $usernameExists = $database_connection->select_query("SELECT email FROM users WH
 if ($emailExists || $usernameExists) {
     $taken = $emailExists ? "az e-mail cím" : "a felhasználónév";
     $_SESSION["message"] = "Ez ${taken} már foglalt.";
-    header("Location:".$RESULT["link"]);
+    header("Location:".$FRONTEND);
     die();
 }
 
 $database_connection->insert_query("INSERT INTO users(username, email, password_hash) VALUES(?, ?, ?)", $username, $email, $password_hash);
 $_SESSION["message"] = "Sikeres regisztráció mint ".$username.", ".$email." címmel.";
-header("Location:".$RESULT["link"]);
+header("Location:".$FRONTEND);
 ?>

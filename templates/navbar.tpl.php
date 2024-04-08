@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include_once("./includes/config.inc.php");
+    include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
 ?>
 <nav class="nav">
     <div class="nav-menu flex-row">
@@ -15,9 +15,9 @@
         <div>
             <ul class="nav-items">
             <?php
-                foreach ($ALWAYS as $item) {
+                foreach ($ALWAYS as $key => $item) {
                     $text = $item["text"];
-                    $link = $item["link"];
+                    $link = ($key=="/") ? "." : "?page=".$key;
                     echo "<li class='nav-link'><a href=${link}>${text}</a></li>";
                 }
             ?>
@@ -26,15 +26,15 @@
         <div class="social login"> 
             <?php
                 if ($_SESSION["loggedInAs"]) {
-                    foreach ($LOGGEDIN as $item) {
-                        $text = $item["text"] ? $item["text"] : $_SESSION["loggedInAs"];
-                        $link = $item["link"];
+                    foreach ($LOGGEDIN as $key => $item) {
+                        $text = $item["text"];
+                        $link = ($key=="/") ? "." : "?page=".$key;
                         echo "<a href=${link}>${text}<i class='fa-solid fa-user'></i></a>";
                     }
                 } else {
-                    foreach ($LOGGEDOUT as $item) {
+                    foreach ($LOGGEDOUT as $key => $item) {
                         $text = $item["text"];
-                        $link = $item["link"];
+                        $link = ($key=="/") ? "." : "?page=".$key;
                         echo "<a href=${link}>${text}<i class='fa-solid fa-user'></i></a>";
                     }
                 }

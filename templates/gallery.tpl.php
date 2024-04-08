@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("./includes/config.inc.php");
+include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
 $logged_in = !(empty($_SESSION["loggedInAs"]));
 if($logged_in){
     echo '<form action="/foszk_donation/logicals/uploadAttempt.php" method="post" enctype="multipart/form-data">

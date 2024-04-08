@@ -1,86 +1,94 @@
 <?php
-/* Adatbázis kezeléshez használt hitelesítési és egyéb adatok,
-illetve az egyetlen fennálló kapcsolat biztosításához használt $PDO változó*/
 session_start();
-include_once("/home/tbuser/NJE/webprog_project/foszk_donation/includes/classes.inc.php");
-$database_connection = new DataBaseConnection();
+$INCLUDES_PATH = __DIR__;
+$ROOT_PATH = dirname(__DIR__, 1);
+$JS_PATH = $ROOT_PATH."/js";
+$LOGICALS_PATH = $ROOT_PATH."/logicals";
+$TEMPS_PATH = $ROOT_PATH."/templates";
+$FRONTEND = "/foszk_donation/index.php";
+include_once($INCLUDES_PATH."/classes.inc.php");
+
+$database_connection = new DataBaseConnection(); // Adatbázis kapcsolat
+
 if (!isset($_SESSION["loggedInAs"])){
     $_SESSION["loggedInAs"] = false;
 }
+
 // Oldalak, egyesével
 
 $MAIN = array(
     "text"=>"Főoldal",
+    "link"=>$TEMPS_PATH."/index.tpl.php"
 );
 
 $ABOUT = array(
-    "text"=>"Rólunk"
+    "text"=>"Rólunk",
+    "link"=>""
 );
 
 $FINDOWNER = array(
-    "text"=>"Gazdikereső"
+    "text"=>"Gazdikereső",
+    "link"=>""
 );
 
 $GOODTOKNOW = array(
-    "text"=>"Jó tudni"
+    "text"=>"Jó tudni",
+    "link"=>""
 );
 
 $BLOG = array(
-    "text"=>"Blog"
+    "text"=>"Blog",
+    "link"=>""
 );
 
 $CONTACTUS = array(
     "text"=>"Kapcsolat",
-    "link"=>"/foszk_donation/sendMessage.php"
+    "link"=>$TEMPS_PATH."/sendMessage.tpl.php"
 );
 
 $LOGIN = array(
     "text"=>"Belépés",
-    "link"=>"/foszk_donation/login.html"
+    "link"=>$TEMPS_PATH."/login.tpl.php"
 );
 
-$SIGNUP = array(
+$REGISTER = array(
     "text"=>"Regisztráció",
-    "link"=>"/foszk_donation/signUp.html"
+    "link"=>$TEMPS_PATH."/register.tpl.php"
 );
 
 $LOGOUT = array(
     "text"=>"Kijelentkezés",
-    "link"=>"/foszk_donation/logicals/logout.php"
+    "link"=>$LOGICALS_PATH."/logout.php"
 );
 
 $GALLERY = array(
     "text"=>"Galéria",
-    "link"=>"/foszk_donation/uploadImg.php"
+    "link"=>$TEMPS_PATH."/gallery.tpl.php"
 );
 
 $RESULT = array(
     "text"=>"",
-    "link"=>"/foszk_donation/result.php"
+    "link"=>$TEMPS_PATH."/result.tpl.php"
 );
 
 $ALWAYS = array(
-    $MAIN,
-    $ABOUT,
-    $FINDOWNER,
-    $GOODTOKNOW,
-    $BLOG,
-    $CONTACTUS,
-    $GALLERY
-); // Azok az oldalak, amik midig elérhetőek a felhasználó kezdeményezésére
+    "/"=>$MAIN,
+    "about"=>$ABOUT,
+    "findowner"=>$FINDOWNER,
+    "goodtoknow"=>$GOODTOKNOW,
+    "blog"=>$BLOG,
+    "contact"=>$CONTACTUS,
+    "gallery"=>$GALLERY
+); // Azok az oldalak, amik mindig elérhetőek a felhasználó kezdeményezésére
 
 $LOGGEDIN = array(
-    $LOGOUT,
+    "logout"=>$LOGOUT,
 ); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha be van jelentkezve
 
 $LOGGEDOUT = array(
-    $LOGIN,
-    $SIGNUP
-); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha a ki van jelentkezve
-
-$NEVER = array(
-    $RESULT,
-); // Azok az oldalok, amik sose jelenhetnek meg felhasználói kérésre, elsősorban logikai oldalak
+    "login"=>$LOGIN,
+    "register"=>$REGISTER
+); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha ki van jelentkezve
 
 $ALL = array_merge($ALWAYS, $LOGGEDIN, $LOGGEDOUT); // Az összes oldal, ami valamilyen helyzetben a felhasználó kérésére elérhető
 ?>

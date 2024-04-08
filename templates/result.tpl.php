@@ -4,5 +4,5 @@ if (isset($_SESSION["message"])){
     echo $_SESSION["message"];
 }
 unset($_SESSION["message"]);
-header('refresh:3; url=./index.php');
+header('refresh:5; url='.$FRONTEND);
 ?>

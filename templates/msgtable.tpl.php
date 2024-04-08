@@ -1,5 +1,5 @@
 <?php
-include_once("../includes/config.inc.php");
+include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
 $messages = $database_connection->select_query("SELECT * FROM (messages LEFT JOIN users USING(user_id)) ORDER BY message_time");
 ?>
 

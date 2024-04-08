@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once("../includes/config.inc.php");
-include_once("../includes/funcs.inc.php");
+include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
+include_once($INCLUDES_PATH."/funcs.inc.php");
 
 $username = $_POST["username"];
 $password = $_POST["password"];
@@ -9,7 +9,7 @@ $all_set = isset($username, $password);
 
 if (!($all_set)) {
     $_SESSION["message"] = "A megadott belépési adatok hiányosak.";
-    header("Location:".$RESULT["link"]);
+    header("Location:".$FRONTEND);
     die();
 }
 
@@ -28,6 +28,6 @@ if ($password_match){
     $_SESSION["message"] = "Felhasználónév vagy jelszó hibás.";
 }
 
-header("Location:".$RESULT["link"]);
+header("Location:".$FRONTEND);
 
 ?>

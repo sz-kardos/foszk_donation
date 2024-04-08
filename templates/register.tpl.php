@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Regisztráció</title>
-  <link rel="stylesheet" href="./css/login.css">
-  <script src="./js/checks.js"></script>
-</head>
-<body>
-  <div class="container">
+<div class="container">
     <h2>Regisztráció</h2>
-    <form id="signup_form" action="./logicals/signUpAttempt.php" method="post">
+    <form id="signup_form" action="./logicals/registerAttempt.php" method="post">
       <div class="input-group">
         <label for="username">Felhasználónév</label>
         <input type="text" id="username" name="username" required>
@@ -29,6 +19,4 @@
       </div>
       <button type="button" onclick="submitRegistration('signup_form', 'username', 'email', 'password', 'password_repeat')" class="btn">Regisztráció</button>
     </form>
-  </div>
-</body>
-</html>
+</div>
