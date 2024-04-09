@@ -1,9 +1,9 @@
 <?php
-session_start();
 $username = $_SESSION["loggedInAs"] ? $_SESSION["loggedInAs"] : "Vendég";
+$action = $LOGICAL_LINKS['message_attempt'];
 ?>
-<script src="./js/checks.js"></script>
-<form id="message_form" action="/foszk_donation/logicals/messageAttempt.php" method="post">
+
+<form id="message_form" action=<?php echo "${action}";?> method="post">
     <fieldset>
         <legend>Üzenjen nekünk</legend>
         <label for="message">Üzenet</label>

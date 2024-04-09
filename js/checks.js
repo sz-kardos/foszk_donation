@@ -6,6 +6,14 @@ function checkUsername(username){
     return validChars.test(username);
 }
 
+function checkName(name){
+
+    // Igazat ad vissza, ha a név csak a magyar ABC betűiből áll, egyébként hamisat.
+
+    let validChars = new RegExp("^[A-z\u00c1-\u0171]+$");
+    return validChars.test(name);
+}
+
 function checkPassword(password){
 
     // Igazat ad vissza, ha a jelszó csak ! és ~ közötti ASCII karakterekből áll és minimum 8 karakter hosszú, egyébként hamisat.
@@ -29,16 +37,22 @@ function passwordsMatch(password, passwordRepeat){
     return password === passwordRepeat;
 }
 
-function submitRegistration(form_id, username_id, email_id, password_id, password_repeat_id){
+function submitRegistration(form_id, username_id, family_id, given_id, email_id, password_id, password_repeat_id){
 
-    // Ellenőrzi, hogy a forma felhasználónév, e-mail cím és jelszó mezői megfelelnek-e a követelményeknek.
-    // Ha igen, akkor elküldi a formát az adatokkal.
+    // Ellenőrzi, hogy az úrlap felhasználónév, név, e-mail cím és jelszó mezői megfelelnek-e a követelményeknek.
+    // Ha igen, akkor elküldi a lapot az adatokkal.
 
     let username = document.getElementById(username_id).value;
+
+    let family = document.getElementById(family_id).value;
+    let given = document.getElementById(given_id).value;
+
     let email = document.getElementById(email_id).value;
+
     let password = document.getElementById(password_id).value;
     let password_repeat = document.getElementById(password_repeat_id).value;
-    let allValid = checkUsername(username) && checkEmail(email) && checkPassword(password) && passwordsMatch(password, password_repeat);
+
+    let allValid = checkUsername(username) && checkEmail(email) && checkPassword(password) && passwordsMatch(password, password_repeat) && checkName(family) && checkName(given);
     if (allValid) {
         let form = document.getElementById(form_id);
         form.submit()

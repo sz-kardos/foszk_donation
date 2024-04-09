@@ -27,6 +27,15 @@ function checkUsername($username){
     return (bool)$match;
 }
 
+function checkName($name){
+
+    // Igazat ad vissza, ha a név csak a magyar ABC betűiből áll, egyébként hamisat.
+    
+    $valid_chars = "/^[A-z\x{00c1}-\x{0171}]+$/u";
+    $match = preg_match($valid_chars, $name);
+    return (bool)$match;
+}
+
 function checkMessage($message){
 
     /* Lenyírja a szóközöket a bevitt üzenet két végéről, majd ellenőrzi, hogy:

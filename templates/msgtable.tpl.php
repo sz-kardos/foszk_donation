@@ -1,8 +1,3 @@
-<?php
-include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
-$messages = $database_connection->select_query("SELECT * FROM (messages LEFT JOIN users USING(user_id)) ORDER BY message_time");
-?>
-
 <table>
     <tr>
         <th>Időpont</th>
@@ -10,6 +5,7 @@ $messages = $database_connection->select_query("SELECT * FROM (messages LEFT JOI
         <th>Üzenet</th>
     </tr>
     <?php
+    $messages = $database_connection->select_query("SELECT * FROM (messages LEFT JOIN users USING(user_id)) ORDER BY message_time");
     foreach($messages as $message){
         $time = $message["message_time"];
         $sender = $message["username"] ? $message["username"] : "Vendég";

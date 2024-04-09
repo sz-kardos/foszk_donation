@@ -5,7 +5,8 @@ $ROOT_PATH = dirname(__DIR__, 1);
 $JS_PATH = $ROOT_PATH."/js";
 $LOGICALS_PATH = $ROOT_PATH."/logicals";
 $TEMPS_PATH = $ROOT_PATH."/templates";
-$FRONTEND = "/foszk_donation/index.php";
+
+include_once($INCLUDES_PATH."/funcs.inc.php");
 include_once($INCLUDES_PATH."/classes.inc.php");
 
 $database_connection = new DataBaseConnection(); // Adatbázis kapcsolat
@@ -18,77 +19,80 @@ if (!isset($_SESSION["loggedInAs"])){
 
 $MAIN = array(
     "text"=>"Főoldal",
-    "link"=>$TEMPS_PATH."/index.tpl.php"
+    "path"=>$TEMPS_PATH."/index.tpl.php"
 );
 
 $ABOUT = array(
     "text"=>"Rólunk",
-    "link"=>""
+    "path"=>""
 );
 
 $FINDOWNER = array(
     "text"=>"Gazdikereső",
-    "link"=>""
+    "path"=>""
 );
 
 $GOODTOKNOW = array(
     "text"=>"Jó tudni",
-    "link"=>""
+    "path"=>""
 );
 
 $BLOG = array(
     "text"=>"Blog",
-    "link"=>""
+    "path"=>$TEMPS_PATH."/msgtable.tpl.php"
 );
 
 $CONTACTUS = array(
     "text"=>"Kapcsolat",
-    "link"=>$TEMPS_PATH."/sendMessage.tpl.php"
+    "path"=>$TEMPS_PATH."/sendMessage.tpl.php"
 );
 
-$LOGIN = array(
-    "text"=>"Belépés",
-    "link"=>$TEMPS_PATH."/login.tpl.php"
-);
-
-$REGISTER = array(
-    "text"=>"Regisztráció",
-    "link"=>$TEMPS_PATH."/register.tpl.php"
+$LOGIN_REGISTER = array(
+    "text"=>"Belépés/Regisztráció",
+    "path"=>$TEMPS_PATH."/loginRegister.tpl.php"
 );
 
 $LOGOUT = array(
     "text"=>"Kijelentkezés",
-    "link"=>$LOGICALS_PATH."/logout.php"
+    "path"=>$LOGICALS_PATH."/logout.php"
 );
 
 $GALLERY = array(
     "text"=>"Galéria",
-    "link"=>$TEMPS_PATH."/gallery.tpl.php"
+    "path"=>$TEMPS_PATH."/gallery.tpl.php"
 );
 
 $RESULT = array(
     "text"=>"",
-    "link"=>$TEMPS_PATH."/result.tpl.php"
+    "path"=>$TEMPS_PATH."/result.tpl.php"
 );
 
 $ALWAYS = array(
     "/"=>$MAIN,
     "about"=>$ABOUT,
-    "findowner"=>$FINDOWNER,
-    "goodtoknow"=>$GOODTOKNOW,
+    "find_owner"=>$FINDOWNER,
+    "good_to_know"=>$GOODTOKNOW,
     "blog"=>$BLOG,
     "contact"=>$CONTACTUS,
     "gallery"=>$GALLERY
-); // Azok az oldalak, amik mindig elérhetőek a felhasználó kezdeményezésére
+); // Azok az oldalak, amik menüelemként mindig megjelennek
 
 $LOGGEDIN = array(
     "logout"=>$LOGOUT,
-); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha be van jelentkezve
+); // Azok az oldalak, amik menüelemként csak akkor jelennek meg, ha a felhasználó be van jelentkezve
 
 $LOGGEDOUT = array(
-    "login"=>$LOGIN,
-    "register"=>$REGISTER
-); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha ki van jelentkezve
+    "login_register"=>$LOGIN_REGISTER
+); // Azok az oldalak, amik menüelemként csak akkor jelennek meg, ha a felhasználó ki van jelentkezve
 
-$ALL = array_merge($ALWAYS, $LOGGEDIN, $LOGGEDOUT); // Az összes oldal, ami valamilyen helyzetben a felhasználó kérésére elérhető
-?>
+$ALL = array_merge($ALWAYS, $LOGGEDIN, $LOGGEDOUT); // Az összes oldal, ami valamilyen helyzetben menüben megjelenik
+
+$FRONTEND_LINK = "/foszk_donation/index.php";
+$LOGICALS_ROOT_LINK = "./logicals";
+$LOGICAL_LINKS = array(
+    "login_attempt"=>$LOGICALS_ROOT_LINK."/loginAttempt.php",
+    "logout"=>$LOGICALS_ROOT_LINK."/logout.php",
+    "message_attempt"=>$LOGICALS_ROOT_LINK."/messageAttempt.php",
+    "register_attempt"=>$LOGICALS_ROOT_LINK."/registerAttempt.php",
+    "upload_attempt"=>$LOGICALS_ROOT_LINK."/uploadAttempt.php"
+);

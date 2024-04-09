@@ -17,11 +17,12 @@
     <!--  AOS Library -->
     <link rel="stylesheet" href="./css/aos.css">
 
-    <script src="./js/checks.js"></script>
+    <script src="./js/checks.js" type="text/javascript"></script>
 </head>
 <body>
     <!--Navbar-->
     <?php
+        session_start();
         include_once(__DIR__."/includes/config.inc.php");
         include($TEMPS_PATH."/navbar.tpl.php");
     ?>

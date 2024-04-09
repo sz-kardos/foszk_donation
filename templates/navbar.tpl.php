@@ -1,7 +1,3 @@
-<?php 
-    session_start();
-    include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
-?>
 <nav class="nav">
     <div class="nav-menu flex-row">
         <div class="logo">
