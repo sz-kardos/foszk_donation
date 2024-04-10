@@ -61,7 +61,7 @@ function checkFileSize($file){
     return $is_valid_size;
 }
 
-function checkIfImage($file){
+function checkIfImage($filename){
 
     // Ellenőrzni, hogy a fájl a megengedett képfájltípusok egyike-e, ha igen, akkor igazat ad vissza, egyébként hamisat.
 
@@ -70,10 +70,10 @@ function checkIfImage($file){
                         IMAGETYPE_PNG=>"imagecreatefrompng",
                         IMAGETYPE_BMP=>"imagecreatefrombmp",
                         IMAGETYPE_WEBP=>"imagecreatefromwebp");
-    $file_type = exif_imagetype($file["tmp_name"]); // Exif adatból kiolvassa a fájltípust
+    $file_type = exif_imagetype($filename); // Exif adatból kiolvassa a fájltípust
     $is_valid_type = in_array($file_type, array_keys($VALID_TYPES)); // Megnézi az érvényes típusok egyike-e
     if($is_valid_type){
-        $is_valid_type = $VALID_TYPES[$file_type]($file["tmp_name"]); // Ha érvényes, akkor megpróbál az adott típusnak megfelelő képet előállítani a fájl tartalma alapján, ha sikerül, akkor valóban az adott típusú fájl az 
+        $is_valid_type = $VALID_TYPES[$file_type]($filename); // Ha érvényes, akkor megpróbál az adott típusnak megfelelő képet előállítani a fájl tartalma alapján, ha sikerül, akkor valóban az adott típusú fájl az 
     }
     return $is_valid_type;
 }
@@ -83,7 +83,7 @@ function isValidSizeImage($file){
     // Ellenőrzi, hogy megengedett méretű és típusú képfájl-e a megadott fájl. Ha igen, igazat ad vissza, egyébként hamisat.
 
     $is_valid_file = checkFileSize($file);
-    $is_valid_file = $is_valid_file ? checkIfImage($file) : $is_valid_file;
+    $is_valid_file = $is_valid_file ? checkIfImage($file["tmp_name"]) : $is_valid_file;
     return $is_valid_file;
 }
 
