@@ -5,15 +5,23 @@ $ROOT_PATH = dirname(__DIR__, 1);
 $JS_PATH = $ROOT_PATH."/js";
 $LOGICALS_PATH = $ROOT_PATH."/logicals";
 $TEMPS_PATH = $ROOT_PATH."/templates";
+$IMAGES_PATH = $ROOT_PATH."/images";
 
 include_once($INCLUDES_PATH."/funcs.inc.php");
 include_once($INCLUDES_PATH."/classes.inc.php");
 
 $database_connection = new DataBaseConnection(); // Adatbázis kapcsolat
 
-if (!isset($_SESSION["loggedInAs"])){
-    $_SESSION["loggedInAs"] = false;
+if(!isset($_SESSION["logged_in_as"])){
+    $_SESSION["logged_in_as"] = false;
 }
+if(!isset($_SESSION["family"])){
+    $_SESSION["family"] = "";
+}
+if(!isset($_SESSION["given"])){
+    $_SESSION["given"] = "";
+}
+
 
 // Oldalak, egyesével
 
@@ -53,7 +61,7 @@ $LOGIN_REGISTER = array(
 );
 
 $LOGOUT = array(
-    "text"=>"Kijelentkezés",
+    "text"=>"Kilépés",
     "path"=>$LOGICALS_PATH."/logout.php"
 );
 
@@ -96,3 +104,4 @@ $LOGICAL_LINKS = array(
     "register_attempt"=>$LOGICALS_ROOT_LINK."/registerAttempt.php",
     "upload_attempt"=>$LOGICALS_ROOT_LINK."/uploadAttempt.php"
 );
+$IMAGES_ROOT_LINK = "./images";

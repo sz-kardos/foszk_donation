@@ -14,29 +14,33 @@
                 foreach ($ALWAYS as $key => $item) {
                     $text = $item["text"];
                     $link = ($key=="/") ? "." : "?page=".$key;
-                    echo "<li class='nav-link'><a href=${link}>${text}</a></li>";
+                    echo sprintf("<li class='nav-link'><a href=%s>%s</a></li>", $link, $text);
                 }
             ?>
             </ul>
         </div>
+        <?php
+            if ($_SESSION["logged_in_as"]) {
+                echo sprintf("<div class='social text-gray'><span>Bejelentkezve: %s %s (%s)</span></div>", $_SESSION["family"], $_SESSION["given"], $_SESSION["logged_in_as"]);
+            }
+        ?>
         <div class="social login"> 
             <?php
-                if ($_SESSION["loggedInAs"]) {
+                if ($_SESSION["logged_in_as"]) {
                     foreach ($LOGGEDIN as $key => $item) {
                         $text = $item["text"];
                         $link = ($key=="/") ? "." : "?page=".$key;
-                        echo "<a href=${link}>${text}<i class='fa-solid fa-user'></i></a>";
+                        echo sprintf("<a href=%s><span>%s</span><i class='fa-solid fa-user'></i></a>", $link, $text);
                     }
                 } else {
                     foreach ($LOGGEDOUT as $key => $item) {
                         $text = $item["text"];
                         $link = ($key=="/") ? "." : "?page=".$key;
-                        echo "<a href=${link}>${text}<i class='fa-solid fa-user'></i></a>";
+                        echo sprintf("<a href=%s>%s<i class='fa-solid fa-user'></i></a>", $link, $text);
                     }
                 }
             ?>
         </div>
-
         <div class="social text-gray">
             <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>

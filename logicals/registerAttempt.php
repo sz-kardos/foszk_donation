@@ -60,7 +60,7 @@ if ($emailExists || $usernameExists) {
     die();
 }
 
-$database_connection->insert_query("INSERT INTO users(username, email, password_hash) VALUES(?, ?, ?)", $username, $email, $password_hash);
+$database_connection->insert_query("INSERT INTO users(username, family, given, email, password_hash) VALUES(?, ?, ?, ?, ?)", $username, $family_name, $given_name, $email, $password_hash);
 $_SESSION["message"] = "Sikeres regisztráció mint ".$username.", ".$email." címmel.";
 header("Location:".$FRONTEND_LINK);
 ?>

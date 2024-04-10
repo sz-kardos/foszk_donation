@@ -21,8 +21,11 @@ if (isset($password_hash)) {
 } 
 
 if ($password_match){
-    $_SESSION["loggedInAs"] = $username;
-    $_SESSION["message"] = "Bejelentkezve mint ".$_SESSION["loggedInAs"];    
+    $names = $database_connection->select_query("SELECT family, given FROM users WHERE username = ?", $username);
+    $_SESSION["family"] = $names[0]["family"];
+    $_SESSION["given"] = $names[0]["given"];
+    $_SESSION["logged_in_as"] = $username;
+    $_SESSION["message"] = "Bejelentkezve mint ".$_SESSION["logged_in_as"];    
 } else {
     $_SESSION["message"] = "Felhasználónév vagy jelszó hibás.";
 }
