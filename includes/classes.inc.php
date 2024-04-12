@@ -1,6 +1,6 @@
 <?php
 
-class DataBaseConnection{
+class DatabaseConnection{
     private $pdo = NULL;
     private $host = 'localhost';
     private $dbname = 'webprog1';

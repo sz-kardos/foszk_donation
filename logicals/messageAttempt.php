@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
-$username = $_SESSION["loggedInAs"];
+$username = $_SESSION["logged_in_as"];
 $message = $_POST["message"];
 $sender = $username ? $username : "Vendég";
 $all_set = isset($username, $message);

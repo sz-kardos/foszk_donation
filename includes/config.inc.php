@@ -10,7 +10,7 @@ $IMAGES_PATH = $ROOT_PATH."/images";
 include_once($INCLUDES_PATH."/funcs.inc.php");
 include_once($INCLUDES_PATH."/classes.inc.php");
 
-$database_connection = new DataBaseConnection(); // Adatbázis kapcsolat
+$database_connection = new DatabaseConnection(); // Adatbázis kapcsolat
 
 if(!isset($_SESSION["logged_in_as"])){
     $_SESSION["logged_in_as"] = false;
@@ -96,7 +96,7 @@ $LOGGEDOUT = array(
 $ALL = array_merge($ALWAYS, $LOGGEDIN, $LOGGEDOUT); // Az összes oldal, ami valamilyen helyzetben menüben megjelenik
 
 $FRONTEND_LINK = "/foszk_donation/index.php";
-$LOGICALS_ROOT_LINK = "./logicals";
+$LOGICALS_ROOT_LINK = "/foszk_donation/logicals";
 $LOGICAL_LINKS = array(
     "login_attempt"=>$LOGICALS_ROOT_LINK."/loginAttempt.php",
     "logout"=>$LOGICALS_ROOT_LINK."/logout.php",

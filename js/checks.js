@@ -62,17 +62,16 @@ function submitRegistration(form_id, username_id, family_id, given_id, email_id,
 
 function checkMessage(message){
 
-    // Lenyírja a szóközöket a bevitt üzenet két végéről, majd ellenőrzi, hogy:
-    // - az így kapott karakterláncban van-e nem szóköz karakter,
+    // Lenyírja a kapott karakterláncról a white spaceket, ellenőrizi, hogy
+    // - a megnyírt karakterláncban van-e még karakter,
     // - rövidebb-e, mint a megengedett hossz.
     // Ha igen, akkor igazat ad vissza, egyébként hamisat.
 
-    message = message.trim()
-    let messagePattern = new RegExp("\\S+");
+    message = message.trim();
     let messageLength = message.length;
     let maxLength = 1024;
     let lsEqMax = messageLength <= maxLength;
-    let validMessage = messagePattern.test(message) && lsEqMax;
+    let validMessage = messageLength && lsEqMax;
     return validMessage;
 }
 

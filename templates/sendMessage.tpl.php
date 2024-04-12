@@ -1,5 +1,4 @@
 <?php
-$username = $_SESSION["loggedInAs"] ? $_SESSION["loggedInAs"] : "Vendég";
 $action = $LOGICAL_LINKS['message_attempt'];
 ?>
 
