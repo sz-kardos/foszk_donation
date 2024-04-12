@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +20,7 @@
 
     <script src="./js/checks.js" type="text/javascript"></script>
 </head>
+
 <body>
     <!--Navbar-->
     <?php
@@ -33,7 +35,7 @@
             ?>
     </main>
 
-  
+
 
 
     <!-- Footer -->
@@ -62,6 +64,10 @@
                     <img src="./assets/vizsla-.jpg" alt="insta4">
                     <img src="./assets/beagle.jpg" alt="insta5">
                     <img src="./assets/labi.jpg" alt="insta6">
+                    <video controls width="100">
+                        <source src="./assets/puli.mp4" class="img" type="video/mp4">
+                        A böngésződ nem támogatja ezt a formátumot.
+                    </video>
                 </div>
             </div>
             <div class="follow" data-aos="fade-left" data-aos-delay="200">
@@ -77,7 +83,7 @@
         </div>
         <div class="rights flex-row">
             <h4 class="text-gray">
-                 ©2024  | made by team mind1
+                ©2024 | made by team mind1
                 <a href="https://github.com/sz-kardos/foszk_donation" target="_black">check our code <i class="fa-brands fa-github"></i>
                     Tube</a>
             </h4>
@@ -99,4 +105,5 @@
 
     <script src="./js/main.js"></script>
 </body>
+
 </html>

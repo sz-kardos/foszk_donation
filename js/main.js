@@ -47,7 +47,7 @@ $(document).ready(function () {
 
 });
 
-// modal click
+//modal működése
 let modal = document.getElementById("myModal");
 let btn = document.getElementById("openModal");
 let span = document.getElementsByClassName("close")[0];
@@ -62,7 +62,7 @@ span.onclick = function() {
     stopVideo();
   }
   
-window.onclick = function(event) {
+onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
       stopVideo();
@@ -73,3 +73,49 @@ function stopVideo() {
     let iframeSrc = iframe.src;
     iframe.src = iframeSrc;
   }
+
+
+  onclick = function(event) {
+    if (event.target == modal) {
+      closeModal(); 
+    }
+  }
+
+function closeModal() {
+    modal.style.display = "none";
+}
+
+// api hívás
+function searchTest() {
+    fetch('https://dog.ceo/api/breeds/image/random')
+      .then(response => response.json())
+      .then(data => {
+        displayDogImage(data.message);
+      })
+      .catch(error => console.error('Hiba történt:', error));
+  }
+  
+ // kép megjelenítése modalban
+function displayDogImage(imageUrl) {
+    let modal = document.getElementById("modal");
+    let dogImage = document.getElementById("dogImage");
+    dogImage.src = imageUrl;
+    modal.style.display = "block";
+  
+    // Kilépőgomb  hozzáadása
+    let closeButton = document.querySelector(".close");
+    closeButton.addEventListener("click", closeModal);
+
+
+    modal.onclick = function(event) {
+      if (event.target == modal) {
+        closeModal(); 
+      }
+    }
+  
+    function closeModal() {
+      modal.style.display = "none";
+  }
+  }
+  
+
