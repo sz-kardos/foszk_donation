@@ -8,7 +8,7 @@ class DataBaseConnection{
     private $password = '';
 
     private function connectdb(){
-        $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->dbpassword);
+        $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -31,7 +31,7 @@ class DataBaseConnection{
                 $results = $statement->fetchAll();
             }
         } catch (PDOException $e) {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+            header($_SERVER["SERVER_PROTOCOL"].' 500 Internal Server Error', true, 500);
             die();
         } finally {
             $this->closedb();

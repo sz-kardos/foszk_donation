@@ -1,86 +1,107 @@
 <?php
-/* Adatbázis kezeléshez használt hitelesítési és egyéb adatok,
-illetve az egyetlen fennálló kapcsolat biztosításához használt $PDO változó*/
 session_start();
-include_once("/home/tbuser/NJE/webprog_project/foszk_donation/includes/classes.inc.php");
-$database_connection = new DataBaseConnection();
-if (!isset($_SESSION["loggedInAs"])){
-    $_SESSION["loggedInAs"] = NULL;
+$INCLUDES_PATH = __DIR__;
+$ROOT_PATH = dirname(__DIR__, 1);
+$JS_PATH = $ROOT_PATH."/js";
+$LOGICALS_PATH = $ROOT_PATH."/logicals";
+$TEMPS_PATH = $ROOT_PATH."/templates";
+$IMAGES_PATH = $ROOT_PATH."/images";
+
+include_once($INCLUDES_PATH."/funcs.inc.php");
+include_once($INCLUDES_PATH."/classes.inc.php");
+
+$database_connection = new DataBaseConnection(); // Adatbázis kapcsolat
+
+if(!isset($_SESSION["logged_in_as"])){
+    $_SESSION["logged_in_as"] = false;
 }
+if(!isset($_SESSION["family"])){
+    $_SESSION["family"] = "";
+}
+if(!isset($_SESSION["given"])){
+    $_SESSION["given"] = "";
+}
+
+
 // Oldalak, egyesével
 
 $MAIN = array(
     "text"=>"Főoldal",
+    "path"=>$TEMPS_PATH."/index.tpl.php"
 );
 
 $ABOUT = array(
-    "text"=>"Rólunk"
+    "text"=>"Rólunk",
+    "path"=>""
 );
 
 $FINDOWNER = array(
-    "text"=>"Gazdikereső"
+    "text"=>"Gazdikereső",
+    "path"=>""
 );
 
 $GOODTOKNOW = array(
-    "text"=>"Jó tudni"
+    "text"=>"Jó tudni",
+    "path"=>""
 );
 
 $BLOG = array(
-    "text"=>"Blog"
+    "text"=>"Blog",
+    "path"=>$TEMPS_PATH."/msgtable.tpl.php"
 );
 
 $CONTACTUS = array(
     "text"=>"Kapcsolat",
-    "link"=>"/foszk_donation/sendMessage.php"
+    "path"=>$TEMPS_PATH."/sendMessage.tpl.php"
 );
 
-$LOGIN = array(
-    "text"=>"Belépés",
-    "link"=>"/foszk_donation/login.html"
-);
-
-$SIGNUP = array(
-    "text"=>"Regisztráció",
-    "link"=>"/foszk_donation/signUp.html"
+$LOGIN_REGISTER = array(
+    "text"=>"Belépés/Regisztráció",
+    "path"=>$TEMPS_PATH."/loginRegister.tpl.php"
 );
 
 $LOGOUT = array(
-    "text"=>"Kijelentkezés",
-    "link"=>"/foszk_donation/logicals/logout.php"
+    "text"=>"Kilépés",
+    "path"=>$LOGICALS_PATH."/logout.php"
 );
 
-$PROFILE = array(
-    "text"=>"",
-    "link"=>""
+$GALLERY = array(
+    "text"=>"Galéria",
+    "path"=>$TEMPS_PATH."/gallery.tpl.php"
 );
 
 $RESULT = array(
     "text"=>"",
-    "link"=>"/foszk_donation/result.php"
+    "path"=>$TEMPS_PATH."/result.tpl.php"
 );
 
 $ALWAYS = array(
-    $MAIN,
-    $ABOUT,
-    $FINDOWNER,
-    $GOODTOKNOW,
-    $BLOG,
-    $CONTACTUS
-); // Azok az oldalak, amik midig elérhetőek a felhasználó kezdeményezésére
+    "/"=>$MAIN,
+    "about"=>$ABOUT,
+    "find_owner"=>$FINDOWNER,
+    "good_to_know"=>$GOODTOKNOW,
+    "blog"=>$BLOG,
+    "contact"=>$CONTACTUS,
+    "gallery"=>$GALLERY
+); // Azok az oldalak, amik menüelemként mindig megjelennek
 
 $LOGGEDIN = array(
-    $LOGOUT,
-    $PROFILE
-); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha be van jelentkezve
+    "logout"=>$LOGOUT,
+); // Azok az oldalak, amik menüelemként csak akkor jelennek meg, ha a felhasználó be van jelentkezve
 
 $LOGGEDOUT = array(
-    $LOGIN,
-    $SIGNUP
-); // Azok az oldalak, amik csak akkor érhetőek el a felhasználó kérésére, ha a ki van jelentkezve
+    "login_register"=>$LOGIN_REGISTER
+); // Azok az oldalak, amik menüelemként csak akkor jelennek meg, ha a felhasználó ki van jelentkezve
 
-$NEVER = array(
-    $RESULT,
-); // Azok az oldalok, amik sose jelenhetnek meg felhasználói kérésre, elsősorban logikai oldalak
+$ALL = array_merge($ALWAYS, $LOGGEDIN, $LOGGEDOUT); // Az összes oldal, ami valamilyen helyzetben menüben megjelenik
 
-$ALL = array_merge($ALWAYS, $LOGGEDIN, $LOGGEDOUT); // Az összes oldal, ami valamilyen helyzetben a felhasználó kérésére elérhető
-?>
+$FRONTEND_LINK = "/foszk_donation/index.php";
+$LOGICALS_ROOT_LINK = "./logicals";
+$LOGICAL_LINKS = array(
+    "login_attempt"=>$LOGICALS_ROOT_LINK."/loginAttempt.php",
+    "logout"=>$LOGICALS_ROOT_LINK."/logout.php",
+    "message_attempt"=>$LOGICALS_ROOT_LINK."/messageAttempt.php",
+    "register_attempt"=>$LOGICALS_ROOT_LINK."/registerAttempt.php",
+    "upload_attempt"=>$LOGICALS_ROOT_LINK."/uploadAttempt.php"
+);
+$IMAGES_ROOT_LINK = "./images";

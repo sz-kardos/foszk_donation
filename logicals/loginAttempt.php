@@ -1,15 +1,14 @@
 <?php
 session_start();
-include_once("../includes/config.inc.php");
-include_once("../includes/funcs.inc.php");
+include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
 
-$username = $_POST["username"];
-$password = $_POST["password"];
-$all_set = isset($username) && isset($password);
+$username = $_POST["login_username"];
+$password = $_POST["login_password"];
+$all_set = isset($username, $password);
 
 if (!($all_set)) {
     $_SESSION["message"] = "A megadott belépési adatok hiányosak.";
-    header("Location:".$RESULT["link"]);
+    header("Location:".$FRONTEND_LINK);
     die();
 }
 
@@ -22,12 +21,15 @@ if (isset($password_hash)) {
 } 
 
 if ($password_match){
-    $_SESSION["loggedInAs"] = $username;
-    $_SESSION["message"] = "Bejelentkezve mint ".$_SESSION["loggedInAs"];    
+    $names = $database_connection->select_query("SELECT family, given FROM users WHERE username = ?", $username);
+    $_SESSION["family"] = $names[0]["family"];
+    $_SESSION["given"] = $names[0]["given"];
+    $_SESSION["logged_in_as"] = $username;
+    $_SESSION["message"] = "Bejelentkezve mint ".$_SESSION["logged_in_as"];    
 } else {
     $_SESSION["message"] = "Felhasználónév vagy jelszó hibás.";
 }
 
-header("Location:".$RESULT["link"]);
+header("Location:".$FRONTEND_LINK);
 
 ?>

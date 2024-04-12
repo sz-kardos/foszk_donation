@@ -1,8 +1,7 @@
 <?php
-session_start();
 if (isset($_SESSION["message"])){
     echo $_SESSION["message"];
 }
 unset($_SESSION["message"]);
-header('refresh:3; url=./index.php');
+echo "<meta http-equiv='refresh' content='5;url=${FRONTEND_LINK}'>";
 ?>

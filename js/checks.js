@@ -6,6 +6,14 @@ function checkUsername(username){
     return validChars.test(username);
 }
 
+function checkName(name){
+
+    // Igazat ad vissza, ha a név csak a magyar ABC betűiből áll, egyébként hamisat.
+
+    let validChars = new RegExp("^[A-z\u00c1-\u0171]+$");
+    return validChars.test(name);
+}
+
 function checkPassword(password){
 
     // Igazat ad vissza, ha a jelszó csak ! és ~ közötti ASCII karakterekből áll és minimum 8 karakter hosszú, egyébként hamisat.
@@ -22,24 +30,59 @@ function checkEmail(email){
     return emailPattern.test(email);
 }
 
-function passwordsMatch(password, password_repeat){
+function passwordsMatch(password, passwordRepeat){
 
     // Igazat ad vissza, ha a jelszó pontosan megegyezik a jelszó megerősítésével, egyébként hamisat
 
-    return password === password_repeat;
+    return password === passwordRepeat;
 }
 
-function submitRegistration(form_id, username_id, email_id, password_id, password_repeat_id){
+function submitRegistration(form_id, username_id, family_id, given_id, email_id, password_id, password_repeat_id){
 
-    // Ellenőrzi, hogy a forma felhasználónév, e-mail cím és jelszó mezői megfelelnek-e a követelményeknek.
-    // Ha igen, akkor elküldi a formát az adatokkal.
+    // Ellenőrzi, hogy az úrlap felhasználónév, név, e-mail cím és jelszó mezői megfelelnek-e a követelményeknek.
+    // Ha igen, akkor elküldi a lapot az adatokkal.
 
     let username = document.getElementById(username_id).value;
+
+    let family = document.getElementById(family_id).value;
+    let given = document.getElementById(given_id).value;
+
     let email = document.getElementById(email_id).value;
+
     let password = document.getElementById(password_id).value;
     let password_repeat = document.getElementById(password_repeat_id).value;
-    let all_valid = checkUsername(username) && checkEmail(email) && checkPassword(password) && passwordsMatch(password, password_repeat);
-    if (all_valid) {
+
+    let allValid = checkUsername(username) && checkEmail(email) && checkPassword(password) && passwordsMatch(password, password_repeat) && checkName(family) && checkName(given);
+    if (allValid) {
+        let form = document.getElementById(form_id);
+        form.submit()
+    }
+    return;
+}
+
+function checkMessage(message){
+
+    // Lenyírja a szóközöket a bevitt üzenet két végéről, majd ellenőrzi, hogy:
+    // - az így kapott karakterláncban van-e nem szóköz karakter,
+    // - rövidebb-e, mint a megengedett hossz.
+    // Ha igen, akkor igazat ad vissza, egyébként hamisat.
+
+    message = message.trim()
+    let messagePattern = new RegExp("\\S+");
+    let messageLength = message.length;
+    let maxLength = 1024;
+    let lsEqMax = messageLength <= maxLength;
+    let validMessage = messagePattern.test(message) && lsEqMax;
+    return validMessage;
+}
+
+function submitMessage(form_id, message_id){
+
+    // Ellenőrzi, hogy a forma üzenet mezője megfelel-e a követelményeknek.
+    // Ha igen, akkor elküldi a formát az adatokkal.
+
+    let message = document.getElementById(message_id).value;
+    if (checkMessage(message)) {
         let form = document.getElementById(form_id);
         form.submit()
     }
