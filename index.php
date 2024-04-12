@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +18,11 @@
     <!--  AOS Library -->
     <link rel="stylesheet" href="./css/aos.css">
 </head>
+
 <body>
     <!--Navbar-->
     <?php
-        include("./templates/navbar.tpl.php");
+    include("./templates/navbar.tpl.php");
     ?>
     <!--<nav class="nav">
         <div class="nav-menu flex-row">
@@ -78,15 +80,15 @@
                 <h3>Kisállat ügynökség</h3>
                 <h1>Nálunk igazi családtagra találsz</h1>
                 <button class="btn" id="openModal">megnézem</button>
-                    <div id="myModal" class="modal">
-                <div class="modal-content">
-                     <span class="close">&times;</span>
-                     <div class="video-container">
-                     <iframe width="560" height="315" src="https://www.youtube.com/embed/fs2TM6VpUt8?si=E2a2ZAeo01rfnaAz&amp;start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/fs2TM6VpUt8?si=E2a2ZAeo01rfnaAz&amp;start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+
                     </div>
-                     
                 </div>
-            </div>
             </div>
         </section>
 
@@ -138,7 +140,7 @@
             </div>
         </section>
 
-        
+
 
         <!--  Site Content -->
 
@@ -199,7 +201,7 @@
                             <p>LA puli egyike a kilenc magyar kutyafajtának, és világszerte a legismertebb terelőkutyafajta közülük. Mintegy száz éve szervezetten tenyésztik.
 
                                 Ősei a pásztoremberek nélkülözhetetlen segítői voltak. Akár egy marhát is adtak egy-egy híres terelő kölykéért. A külsejével nem törődtek. A puli fennmaradása a szorgalmának, találékonyságának, intelligenciájának tudható be. A zord körülmények, a kemény munka edzetté, ellenállóvá és igénytelenné tették a fajtát, ezek a vonások pedig a mai napig jellemzőek a pulira.
-                            <button class="btn post-btn">bővebben &nbsp; <i class="fas fa-arrow-right"></i></button>
+                                <button class="btn post-btn">bővebben &nbsp; <i class="fas fa-arrow-right"></i></button>
                         </div>
                     </div>
                     <hr>
@@ -221,7 +223,7 @@
                             <button class="btn post-btn">bővebben &nbsp; <i class="fas fa-arrow-right"></i></button>
                         </div>
                     </div>
-                   
+
                 </div>
                 <aside class="sidebar">
                     <div class="category">
@@ -328,10 +330,35 @@
                         </div>
                     </div>
                     <div class="newsletter" data-aos="fade-up" data-aos-delay="300">
-                        <h2>Hírlevél</h2>
-                        <div class="form-element">
-                            <input type="text" class="input-element" placeholder="Email">
-                            <button class="btn form-btn">Feliratkozás</button>
+                        <h1>Milyen kutya lennél?</h1>
+
+                        <div id="questions">
+                            <p>Melyik állítás igaz rád?</p>
+                            <input type="radio" name="question1" value="programozok"> Éjjel-nappal programozok<br>
+                            <input type="radio" name="question1" value="sportolok"> Sportolok<br>
+                            <input type="radio" name="question1" value="olvasok"> Inkább olvasok<br>
+
+                            <p>Hol élsz?</p>
+                            <input type="radio" name="question2" value="lakas"> Lakásban<br>
+                            <input type="radio" name="question2" value="haz"> Házban<br>
+
+                            <p>Szereted a csontot?</p>
+                            <input type="radio" name="question3" value="igen"> Igen<br>
+                            <input type="radio" name="question3" value="nem"> Nem<br>
+                            <input type="radio" name="question3" value="nem"> Vegán vagyok<br>
+
+                            <p>Volt már korábban kutyád?</p>
+                            <input type="radio" name="question4" value="igen"> Igen<br>
+                            <input type="radio" name="question4" value="nem"> Nem<br>
+
+                            <button class="btn" onclick="searchTest()">Mutasd</button>
+                        </div>
+
+                        <div id="modal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <img id="dogImage" src="" alt="Kutya képe">
+                            </div>
                         </div>
                     </div>
                     <div class="popular-tags">
@@ -353,7 +380,7 @@
 
     </main>
 
-  
+
 
 
     <!-- Footer -->
@@ -382,6 +409,10 @@
                     <img src="./assets/vizsla-.jpg" alt="insta4">
                     <img src="./assets/beagle.jpg" alt="insta5">
                     <img src="./assets/labi.jpg" alt="insta6">
+                    <video controls width="100">
+                        <source src="./assets/puli.mp4" class="img" type="video/mp4">
+                        A böngésződ nem támogatja ezt a formátumot.
+                    </video>
                 </div>
             </div>
             <div class="follow" data-aos="fade-left" data-aos-delay="200">
@@ -397,7 +428,7 @@
         </div>
         <div class="rights flex-row">
             <h4 class="text-gray">
-                 ©2024  | made by team mind1
+                ©2024 | made by team mind1
                 <a href="https://github.com/sz-kardos/foszk_donation" target="_black">check our code <i class="fa-brands fa-github"></i>
                     Tube</a>
             </h4>
@@ -419,4 +450,5 @@
 
     <script src="./js/main.js"></script>
 </body>
+
 </html>
