@@ -3,19 +3,25 @@ session_start();
 include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
 
 $image = $_FILES["image_to_upload"];
-if($image["error"]>0){
+
+//Rendben ment a feltöltés?
+if(!isset($image) || $image["error"]>0){
     $_SESSION["message"] = "Valami hiba történt a fájl feltöltése közben.";
     header("Location:".$FRONTEND_LINK);
     die();
 }
 
+//Érvénzes méretű és típusú fájl?
 $valid_image = isValidSizeImage($image);
 if(!$valid_image){
+
     $_SESSION["message"] = "Az adott fájl mérete túl nagy, vagy nem megengedett típusó képfájl.";
     header("Location:".$FRONTEND_LINK);
     die();
 }
-$target_dir = "../images/";
+
+//Létezik a feltöltéshez szükséges mappa?
+$target_dir = $IMAGES_PATH."/";
 $dir_exists = is_dir($target_dir);
 
 if(!$dir_exists){
@@ -27,15 +33,17 @@ if(!$dir_exists){
     }
 }
 
+//Van már ilzen nevű állománz a célhelyen?
 $target_file = $target_dir . basename($image["name"]);
 $filename_exists = file_exists($target_file);
-echo $filename_exists?"y":"n";
+
 if ($filename_exists) {
     $_SESSION["message"] = "Ezzel a névvel már létezik fájl a célhelyen.";
     header("Location:".$FRONTEND_LINK);
     die();
 }
 
+//Bemásolás a célmappába
 $upload_success = move_uploaded_file($image["tmp_name"], $target_file);
 
 if ($upload_success) {

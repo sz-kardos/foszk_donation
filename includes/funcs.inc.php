@@ -38,17 +38,16 @@ function checkName($name){
 
 function checkMessage($message){
 
-    /* Lenyírja a szóközöket a bevitt üzenet két végéről, majd ellenőrzi, hogy:
-     - az így kapott karakterláncban van-e nem szóköz karakter,
-     - rövidebb-e, mint a megengedett hossz.
-    Ha igen, akkor igazat ad vissza, egyébként hamisat. */
+    // Lenyírja a kapott karakterláncról a white spaceket, ellenőrizi, hogy
+    // - a megnyírt karakterláncban van-e még karakter,
+    // - rövidebb-e, mint a megengedett hossz.
+    // Ha igen, akkor igazat ad vissza, egyébként hamisat.
 
     $message = trim($message);
-    $messagePattern = "/\S+/";
     $messageLength = strlen($message);
     $maxLength = 1024;
     $lsEqMax = $messageLength <= $maxLength;
-    $validMessage = preg_match($messagePattern, $message) && $lsEqMax;
+    $validMessage = $messageLength && $lsEqMax;
     return $validMessage;
 }
 
@@ -75,7 +74,7 @@ function checkIfImage($filename){
     if($is_valid_type){
         $is_valid_type = $VALID_TYPES[$file_type]($filename); // Ha érvényes, akkor megpróbál az adott típusnak megfelelő képet előállítani a fájl tartalma alapján, ha sikerül, akkor valóban az adott típusú fájl az 
     }
-    return $is_valid_type;
+    return (boolean)$is_valid_type;
 }
 
 function isValidSizeImage($file){
@@ -85,6 +84,14 @@ function isValidSizeImage($file){
     $is_valid_file = checkFileSize($file);
     $is_valid_file = $is_valid_file ? checkIfImage($file["tmp_name"]) : $is_valid_file;
     return $is_valid_file;
+}
+
+function PathToUrl($path)
+{
+    //https://stackoverflow.com/questions/44788370/relative-file-paths-for-links-within-a-php-include
+
+    $path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $path);
+    return $path;
 }
 
 ?>
