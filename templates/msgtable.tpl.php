@@ -1,4 +1,5 @@
-<table>
+<div class="container-table">
+    <table class="table">
     <tr>
         <th>Időpont</th>
         <th>Küldő</th>
@@ -18,3 +19,4 @@
     }
     ?>
 </table>
+</div>
