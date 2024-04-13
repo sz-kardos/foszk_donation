@@ -7,7 +7,7 @@
     <title>Kutyásodj</title>
 
     <link rel="stylesheet" href="./css/style.css">
-
+    <link rel="stylesheet" href="./css/login.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="./css/all.css">
 

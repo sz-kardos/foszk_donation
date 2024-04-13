@@ -3,16 +3,20 @@
 class DatabaseConnection{
     private $pdo = NULL;
     private $host = 'localhost';
-    private $dbname = 'webprog1';
-    private $username = 'root';
+    private $dbname = 'bt39ls';
+    private $username = 'bt39ls';
     private $password = '';
-
+    
     private function connectdb(){
+        // PDO objektum létrehozása, hibakezelés módjának beállítása
+
         $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function is_closed(){
+        // 
+
         return is_null($this->$pdo);
     }
 

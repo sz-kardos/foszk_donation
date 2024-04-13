@@ -1,12 +1,11 @@
 <?php
 $login_action = $LOGICAL_LINKS['login_attempt'];
 $register_action = $LOGICAL_LINKS['register_attempt'];
-echo $_SERVER['DOCUMENT_ROOT'];
 ?>
 
 <div class="container">
     <form action=<?php echo "${login_action}";?> method="post">
-        <h2> Bejelentkezés</h2>
+        <h2>Bejelentkezés</h2>
         <div class="input-group">
         <label for="login_username">Felhasználónév</label>
         <input type="text" id="login_username" name="login_username" required>
