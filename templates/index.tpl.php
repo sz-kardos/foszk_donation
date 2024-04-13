@@ -257,10 +257,37 @@
                         </div>
                     </div>
                     <div class="newsletter" data-aos="fade-up" data-aos-delay="300">
-                        <h2>Hírlevél</h2>
+                        <h2>Milyen kutyafajta vagy?</h2>
                         <div class="form-element">
-                            <input type="text" class="input-element" placeholder="Email">
-                            <button class="btn form-btn">Feliratkozás</button>
+                        <div id="questions">
+  <p>Melyik állítás igaz rád?</p>
+  <input type="radio" name="question1" value="programozok"> Éjjel-nappal programozok<br>
+  <input type="radio" name="question1" value="sportolok"> Sportolok<br>
+  <input type="radio" name="question1" value="olvasok"> Alszok<br>
+
+  <p>Hol élsz?</p>
+  <input type="radio" name="question2" value="lakas"> Lakásban<br>
+  <input type="radio" name="question2" value="haz"> Házban<br>
+
+  <p>Van-e háziállatod?</p>
+  <input type="radio" name="question3" value="igen"> Igen<br>
+  <input type="radio" name="question3" value="nem"> Nem<br>
+
+  <p>Szereted a csontot?</p>
+  <input type="radio" name="question4" value="igen"> Igen<br>
+  <input type="radio" name="question4" value="nem"> Nem<br>
+
+  <button class="btn form-btn" onclick="searchTest()">Keresés</button>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img id="dogImage" src="" alt="Kutya képe">
+  </div>
+</div>
+
+    
                         </div>
                     </div>
                     <div class="popular-tags">
