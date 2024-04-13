@@ -1,16 +1,16 @@
 function checkUsername(username){
     
-    // Igazat ad vissza, ha a felhasználónév csak számokból, betűkből vagy _-ból áll, egyébként hamisat.
+    // Igazat ad vissza, ha a felhasználónév csak számokból, betűkből vagy _-ból áll, és maximum 255 karakter hosszú egyébként hamisat.
     
-    let validChars = new RegExp("^\\w+$");
+    let validChars = new RegExp("^\\w{1,255}$");
     return validChars.test(username);
 }
 
 function checkName(name){
 
-    // Igazat ad vissza, ha a név csak a magyar ABC betűiből áll, egyébként hamisat.
+    // Igazat ad vissza, ha a név csak a magyar ABC betűiből áll és max 32 karakter hosszú, egyébként hamisat.
 
-    let validChars = new RegExp("^[A-z\u00c1-\u0171]+$");
+    let validChars = new RegExp("^[A-z\u00c1-\u0171]{1,32}$");
     return validChars.test(name);
 }
 

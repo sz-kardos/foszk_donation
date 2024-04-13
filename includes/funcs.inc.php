@@ -20,18 +20,18 @@ function checkPassword($password){
 
 function checkUsername($username){
 
-    // Igazat ad vissza, ha a felhasználónév csak számokból, betűkből vagy _-ból áll, egyébként hamisat.
+    // Igazat ad vissza, ha a felhasználónév csak számokból, betűkből vagy _-ból áll és maximum 255 karakter hosszú egyébként hamisat.
 
-    $valid_chars = "/^\w+$/";
+    $valid_chars = "/^\w{1,255}$/";
     $match = preg_match($valid_chars, $username);
     return (bool)$match;
 }
 
 function checkName($name){
 
-    // Igazat ad vissza, ha a név csak a magyar ABC betűiből áll, egyébként hamisat.
+    // Igazat ad vissza, ha a név csak a magyar ABC betűiből áll és max 32 karakter hosszú, egyébként hamisat.
     
-    $valid_chars = "/^[A-z\x{00c1}-\x{0171}]+$/u";
+    $valid_chars = "/^[A-z\x{00c1}-\x{0171}]{1,32}$/u";
     $match = preg_match($valid_chars, $name);
     return (bool)$match;
 }

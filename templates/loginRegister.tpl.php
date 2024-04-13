@@ -1,7 +1,6 @@
 <?php
 $login_action = $LOGICAL_LINKS['login_attempt'];
 $register_action = $LOGICAL_LINKS['register_attempt'];
-echo $_SERVER['DOCUMENT_ROOT'];
 ?>
 
 <div class="container">

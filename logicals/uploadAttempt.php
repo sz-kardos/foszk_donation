@@ -4,14 +4,14 @@ include_once(dirname(__DIR__, 1)."/includes/config.inc.php");
 
 $image = $_FILES["image_to_upload"];
 
-//Rendben ment a feltöltés?
+// Rendben ment a feltöltés?
 if(!isset($image) || $image["error"]>0){
     $_SESSION["message"] = "Valami hiba történt a fájl feltöltése közben.";
     header("Location:".$FRONTEND_LINK);
     die();
 }
 
-//Érvénzes méretű és típusú fájl?
+// Érvényes méretű és típusú fájl?
 $valid_image = isValidSizeImage($image);
 if(!$valid_image){
 
@@ -20,10 +20,11 @@ if(!$valid_image){
     die();
 }
 
-//Létezik a feltöltéshez szükséges mappa?
+// Létezik a feltöltéshez szükséges mappa?
 $target_dir = $IMAGES_PATH."/";
 $dir_exists = is_dir($target_dir);
 
+// Mappa létrehozása, ha nem létezik
 if(!$dir_exists){
     $create_success = mkdir($target_dir);
     if(!$create_success){
@@ -33,7 +34,7 @@ if(!$dir_exists){
     }
 }
 
-//Van már ilzen nevű állománz a célhelyen?
+//Van már ilyen nevű állománz a célhelyen?
 $target_file = $target_dir . basename($image["name"]);
 $filename_exists = file_exists($target_file);
 
