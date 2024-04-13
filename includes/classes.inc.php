@@ -3,8 +3,8 @@
 class DatabaseConnection{
     private $pdo = NULL;
     private $host = 'localhost';
-    private $dbname = 'bt39ls';
-    private $username = 'bt39ls';
+    private $dbname = '';
+    private $username = '';
     private $password = '';
     
     private function connectdb(){
@@ -15,12 +15,14 @@ class DatabaseConnection{
     }
 
     public function is_closed(){
-        // 
+        // Ha null a pdo adattag értéke (zárt kapcsolat), akkor igazat ad vissza
 
         return is_null($this->$pdo);
     }
 
     private function closedb(){
+        // Nullra állítja a pdo adattag értékét (lezárja a kapcsolatot, PHP kézikönyv alapján)
+
         $this->pdo = NULL;
     }
 

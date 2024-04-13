@@ -134,6 +134,26 @@ button.btn{
     padding: 5px;
 }
 
+.container-table{
+    max-width: 1000px;
+ margin-right:auto;
+ margin-left:auto;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ min-height:100vh;
+}
+ .table{
+    width:100%;
+ border:1px solid gray;
+ } 
+ .table-header {
+ display:flex;
+ width:100%;
+ background:#000;
+ padding:(gray* 1.5) 0;
+}
+tr:nth-child(even) {background-color: #c97979;}
 
 /*Modal function*/
 .modal {
